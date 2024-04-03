@@ -2,6 +2,7 @@
 __pycache__/
 dataset/
 documenti/
+documenti_temp/
 temp/
 
 *.jpg
