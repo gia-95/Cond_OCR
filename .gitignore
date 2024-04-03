@@ -4,6 +4,7 @@ dataset/
 documenti/
 documenti_temp/
 temp/
+models/
 
 *.jpg
 *.png

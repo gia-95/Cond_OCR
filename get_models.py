@@ -1,6 +1,8 @@
 import keras_ocr
 import tensorflow as tf
 # tf.get_logger().setLevel('ERROR')
+# tf.compat.v1.disable_eager_execution()
+# tf.compat.v1.experimental.output_all_intermediates(True)
 
 
 
@@ -14,8 +16,18 @@ def get_recognition_trained_model() :
               weights='kurapan'
               )
         
-        recognizer.model.load_weights('models/recogn_checkpoints_weights') 
-        # recognizer.model = tf.keras.models.load_model('modelli_allenati/recogn_checkpoints_weights')
+        # Questo non so perchè ma funziona, con warning, qualcosa carica.
+        recognizer.model.load_weights('models/recogn_checkpoints_weights')
+        
+        # OK!
+      #   recognizer.model  = tf.keras.models.load_model('models/my_model.h5') 
+
+        # OK!
+      #   recognizer.model = tf.keras.models.load_model('models/modello_test') 
+        
+        # NON FUNZIONA.... nonostante la cartella sia uguale a quell'altra, lo devi da come pesi!
+      #   recognizer.model = tf.keras.models.load_model('models/recogn_checkpoints_weights') 
+        
         recognizer.compile()
 
         return recognizer
