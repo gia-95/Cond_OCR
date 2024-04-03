@@ -3,9 +3,12 @@ import os
 import keras_ocr
 import cv2
 import utile
+import tensorflow as tf
+tf.get_logger().setLevel('ERROR')
 
 
 ### CONFIGURAZIONI
+print("Configuro tools...")
 detector = get_models.get_detector_model()
 
 
@@ -17,17 +20,21 @@ numero_immagine = 1
 numero_immagini_salvate = 0
 
 
+#### STAR PROCESS ####
+print("\n\n####  START PROCESS ####")
+
+
 # Prendi indice di numerazione più grande nel dataset
 # (per cominciare a numerare da li  in poi)
 larger_index_dataset = utile.get_larger_index_dataset(dir_dataset)
-print('\nIndice più grande rilevato:', larger_index_dataset, f'({dir_dataset})')
+print('\nIndice più grande rilevato dataset:', larger_index_dataset, f'({dir_dataset})')
 
 # Cicla su tutti i documenti
 for file_name in os.listdir(dir_documenti) :
     if (file_name == '.DS_Store') :
             continue
     
-    print(f'\nAnalizzo file: {file_name}...')
+    print(f'\n- Analizzo file: {file_name}...')
     
     doc_image = keras_ocr.tools.read(f'{dir_documenti}/{file_name}')
 
@@ -51,14 +58,14 @@ for file_name in os.listdir(dir_documenti) :
             numero_immagine = numero_immagine + 1
 
         except:
-            print(f'Errore in immagine: {file_name}')
+            print(f'- Errore in immagine: {file_name}')
             numero_immagini_salvate = numero_immagini_salvate - 1
 
 
     numero_immagini_salvate = numero_immagini_salvate + idx + 1
-    print(f'Bounding-boxes trovate doc corrente: ',idx)
+    print(f'- Bounding-boxes trovate doc corrente: ',idx)
 
-print("\n\nFINE. Numero parole croppate (e salvate):", numero_immagini_salvate)
+print("\n\nFINE - Totale parole trovate (e salvate) :", numero_immagini_salvate)
     
 
 

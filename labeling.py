@@ -28,14 +28,22 @@ recognizer = models.get_recognition_trained_model()
 fiscal_code_pattern = re.compile("^([a-z]{6}[0-9]{2}[a-z]{1}[0-9]{2}[a-z]{1}[0-9]{3}[a-z]{1})$|([0-9]{11})$")
 
 
+### Info generali
+n_immagini_dataset_prelabeling = len([name for name in os.listdir(dir_dataset_images) ])
+print(f"\nNumero immagini presenti nel dataset ({dir_dataset_images}):", n_immagini_dataset_prelabeling)
+
+
 ### Per stamp es. 'Immagine 3 / 150'
 indice_immagine_corrente = 1
 n_immagini_tot = 0
 for filename in os.listdir(dir_temp_images):
     n_immagini_tot = n_immagini_tot+1
 
+### START LABELING ###
+print("\n\n### START LABELING ###")
 
-# Apri i filetxt delle tuple
+
+# Apri i file txt delle tuple
 with open(file_label_txt, 'a') as f_definitivo, open(file_label_temp_txt, 'w') as f_temp: 
 
     # Cicla sulle immagini -> filename
@@ -107,6 +115,18 @@ with open(file_label_txt, 'a') as f_definitivo, open(file_label_temp_txt, 'w') a
 
         
         indice_immagine_corrente = indice_immagine_corrente+1
+
+
+### Riepilogo inserimenti
+print("\n\n### FINE ###")
+n_immagini_dataset_postlabeling = len([name for name in os.listdir(dir_dataset_images) ])
+print(f"- Numero immagini pre-labeling:", n_immagini_dataset_prelabeling)
+print(f"- Numero immagini post-labeling :", n_immagini_dataset_postlabeling)
+print(f"- Aggiunte {n_immagini_dataset_postlabeling - n_immagini_dataset_prelabeling} immagini.\n")
+
+
+f_definitivo.close()
+f_temp.close()
 
 
 

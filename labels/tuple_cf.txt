@@ -1,1 +1,0 @@
-('dataset/images_cf/img_15.jpg', None, 'mmmbnc76a07g482o'), 

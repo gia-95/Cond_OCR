@@ -1,4 +1,7 @@
 import keras_ocr
+import tensorflow as tf
+# tf.get_logger().setLevel('ERROR')
+
 
 
 def get_recognition_trained_model() :
@@ -11,8 +14,8 @@ def get_recognition_trained_model() :
               weights='kurapan'
               )
         
-        recognizer.model.load_weights('models/recogn_checkpoints_wieghts') 
-        # recognizer.model = tf.keras.models.load_model('modelli_allenati/recogn_checkpoints_wieghts')
+        recognizer.model.load_weights('models/recogn_checkpoints_weights') 
+        # recognizer.model = tf.keras.models.load_model('modelli_allenati/recogn_checkpoints_weights')
         recognizer.compile()
 
         return recognizer
