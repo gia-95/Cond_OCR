@@ -1,0 +1,1 @@
+('dataset/images/img_10.jpg', None, 'carta'), ('dataset/images/img_38.jpg', None, 'di'), 

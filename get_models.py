@@ -16,6 +16,7 @@ def get_recognition_trained_model() :
               weights='kurapan'
               )
         
+        
         # Questo non so perchè ma funziona, con warning, qualcosa carica.
         recognizer.model.load_weights('models/recogn_checkpoints_weights')
         
