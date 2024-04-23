@@ -70,7 +70,13 @@ with open(file_label_txt, 'a') as f_definitivo, open(file_label_temp_txt, 'w') a
             plt.pause(0.1)
             
             # Riconosci parola : recognition
-            predicted_word =recognizer.recognize(img)
+            try :
+                predicted_word =recognizer.recognize(img)
+            except :
+                print("Errore recognize...")
+                continue
+            
+            
             print(f'  Predicted: {predicted_word}')
 
             # Inserisci parola stdout
@@ -84,9 +90,10 @@ with open(file_label_txt, 'a') as f_definitivo, open(file_label_temp_txt, 'w') a
                 case 'end': # Termina processo 
                     break
                 
-                case '00': # cancella elemeto (es. illegibile)
+                case '0': # cancella elemeto (es. illegibile)
                     os.remove(pathFile)
                     print('  ...elemento eliminato!')
+                    indice_immagine_corrente = indice_immagine_corrente+1
                     continue
                 
                 case '': # 'nessun inserimento' -> parola predicted OK
@@ -120,9 +127,9 @@ with open(file_label_txt, 'a') as f_definitivo, open(file_label_temp_txt, 'w') a
 ### Riepilogo inserimenti
 print("\n\n### FINE ###")
 n_immagini_dataset_postlabeling = len([name for name in os.listdir(dir_dataset_images) ])
-print(f"- Numero immagini pre-labeling:", n_immagini_dataset_prelabeling)
-print(f"- Numero immagini post-labeling :", n_immagini_dataset_postlabeling)
-print(f"- Aggiunte {n_immagini_dataset_postlabeling - n_immagini_dataset_prelabeling} immagini.\n")
+print("- Numero immagini pre-labeling:", n_immagini_dataset_prelabeling)
+print("- Numero immagini post-labeling :", n_immagini_dataset_postlabeling)
+print("- Aggiunte {n_immagini_dataset_postlabeling - n_immagini_dataset_prelabeling} immagini.\n")
 
 
 f_definitivo.close()

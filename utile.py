@@ -10,9 +10,12 @@ def inserisci_in_CF_file(word, img_filename, label_cf_filename, directory) :
 
 def get_labels_from_file(lables_file_path) :
     tuple = []
-    file = open('labels/tuple.txt','r')
+    file = open(lables_file_path,'r')
     file_content = file.read()[1:]
     array_tuple = file_content.split('), (')
+    
+    if (len(array_tuple) == 1) :
+        return []
 
     for elem in array_tuple :
         temp_array = elem.split('\'')
